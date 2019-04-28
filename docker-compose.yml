@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  app:
+    build: ./app
+    image: bottle
+    restart: always
+
+  web:
+    build: ./web
+    image: web
+    volumes:
+      - ./web/html:/var/lib/nginx/html
+    ports:
+      - "8800:80"
+    depends_on:
+      - app
+    restart: always
